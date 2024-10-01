@@ -9,6 +9,7 @@ builder.Services.AddSwaggerGen();
 
 Setup.AddRegisterServices(builder);
 Setup.AddEntityFrameworkServices(builder);
+Setup.AddAutoMapperServices(builder);
 
 var app = builder.Build();
 
