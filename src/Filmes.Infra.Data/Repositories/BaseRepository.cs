@@ -17,7 +17,7 @@ public abstract class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, T
 
     public virtual void Create(TEntity entity)
     {
-        _context.Entry(entity).State = EntityState.Modified;
+        _context.Entry(entity).State = EntityState.Added;
         _context.SaveChanges();
     }
 
