@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using Filmes.Application.Commands.Cinema;
-using Filmes.Domain.Entities;
+﻿using Filmes.Domain.Entities;
 using Filmes.Domain.Interfaces.Repositories;
 using Filmes.Domain.Interfaces.Services;
 
@@ -9,12 +7,10 @@ namespace Filmes.Domain.Services;
 public class CinemaDomainService : ICinemaDomainService
 {
     private readonly ICinemaRepository _cinemaRepository;
-    private readonly IMapper _mapper;
 
-    public CinemaDomainService(ICinemaRepository cinemaRepository, IMapper mapper)
+    public CinemaDomainService(ICinemaRepository cinemaRepository)
     {
         _cinemaRepository = cinemaRepository;
-        _mapper = mapper;
     }
 
     public List<Cinema> BuscarTodos()
@@ -22,12 +18,10 @@ public class CinemaDomainService : ICinemaDomainService
         return _cinemaRepository.GetAll().ToList();
     }
 
-    public void CriarCinema(CriarCinemaCommand command)
+    public void CriarCinema(Cinema cinema)
     {
-        var cinema = _mapper.Map<Cinema>(command);
         _cinemaRepository.Create(cinema);
     }
-
 
     public void Dispose()
     {

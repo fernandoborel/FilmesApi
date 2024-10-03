@@ -1,4 +1,6 @@
-﻿using Filmes.Domain.Interfaces.Repositories;
+﻿using Filmes.Application.Interfaces;
+using Filmes.Application.Services;
+using Filmes.Domain.Interfaces.Repositories;
 using Filmes.Domain.Interfaces.Services;
 using Filmes.Domain.Mappings;
 using Filmes.Domain.Services;
@@ -12,8 +14,9 @@ public static class Setup
 {
     public static void AddRegisterServices(this WebApplicationBuilder builder)
     {
-        builder.Services.AddTransient<ICinemaRepository, CinemaRepository>();
+        builder.Services.AddTransient<ICinemaAppService, CinemaAppService>();
         builder.Services.AddTransient<ICinemaDomainService, CinemaDomainService>();
+        builder.Services.AddTransient<ICinemaRepository, CinemaRepository>();
     }
 
     public static void AddEntityFrameworkServices(this WebApplicationBuilder builder)
