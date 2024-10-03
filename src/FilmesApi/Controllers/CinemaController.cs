@@ -1,5 +1,5 @@
 ﻿using Filmes.Application.Commands.Cinema;
-using Filmes.Domain.Interfaces.Services;
+using Filmes.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FilmesApi.Controllers;
@@ -8,24 +8,24 @@ namespace FilmesApi.Controllers;
 [ApiController]
 public class CinemaController : ControllerBase
 {
-    private readonly ICinemaDomainService _cinemaDomainService;
+    
+    private readonly ICinemaAppService _cinemaAppService;
 
-    public CinemaController(ICinemaDomainService cinemaDomainService)
+    public CinemaController(ICinemaAppService cinemaAppService)
     {
-        _cinemaDomainService = cinemaDomainService;
+        _cinemaAppService = cinemaAppService;
     }
 
     [HttpGet]
     [Route("BuscarTodos")]
     public IActionResult GetAll()
     {
-        var cinemas = _cinemaDomainService.BuscarTodos();
+        var cinemas = _cinemaAppService.BuscarCinemas();
         if (cinemas != null && cinemas.Any())
-            return StatusCode(200, new { message = "Cinema(s) encontrado(s)", cinemas });
+            return StatusCode(200, new { message = "Cinema(s) encontrado(s)", quantidade = cinemas.Count(), cinemas });
 
         return BadRequest(new { message = "Nenhum cinema encontrado" });
     }
-
 
     [HttpPost]
     [Route("CriarCinema")]
@@ -33,7 +33,7 @@ public class CinemaController : ControllerBase
     {
         try
         {
-            _cinemaDomainService.CriarCinema(command);
+            _cinemaAppService.CriarCinema(command);
             return StatusCode(201, new { message = "Cinema criado com sucesso", cinema = command });
         }
         catch (Exception ex)
