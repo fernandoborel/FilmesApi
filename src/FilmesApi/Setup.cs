@@ -14,9 +14,21 @@ public static class Setup
 {
     public static void AddRegisterServices(this WebApplicationBuilder builder)
     {
+        #region Cinema
+
         builder.Services.AddTransient<ICinemaAppService, CinemaAppService>();
         builder.Services.AddTransient<ICinemaDomainService, CinemaDomainService>();
         builder.Services.AddTransient<ICinemaRepository, CinemaRepository>();
+
+        #endregion
+
+        #region Endereco
+
+        builder.Services.AddTransient<IEnderecoAppService, EnderecoAppService>();
+        builder.Services.AddTransient<IEnderecoDomainService, EnderecoDomainService>();
+        builder.Services.AddTransient<IEnderecoRepository, EnderecoRepository>();
+
+        #endregion
     }
 
     public static void AddEntityFrameworkServices(this WebApplicationBuilder builder)
