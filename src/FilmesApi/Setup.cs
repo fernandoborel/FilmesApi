@@ -29,6 +29,14 @@ public static class Setup
         builder.Services.AddTransient<IEnderecoRepository, EnderecoRepository>();
 
         #endregion
+
+        #region Filme
+
+        builder.Services.AddTransient<IFilmeAppService, FilmeAppService>();
+        builder.Services.AddTransient<IFilmeDomainService, FilmeDomainService>();
+        builder.Services.AddTransient<IFilmeRepository, FilmeRepository>();
+
+        #endregion
     }
 
     public static void AddEntityFrameworkServices(this WebApplicationBuilder builder)
