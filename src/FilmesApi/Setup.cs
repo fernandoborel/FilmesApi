@@ -37,6 +37,14 @@ public static class Setup
         builder.Services.AddTransient<IFilmeRepository, FilmeRepository>();
 
         #endregion
+
+        #region Sessão
+
+        builder.Services.AddTransient<ISessaoAppService, SessaoAppService>();
+        builder.Services.AddTransient<ISessaoDomainService, SessaoDomainService>();
+        builder.Services.AddTransient<ISessaoRepository, SessaoRepository>();
+
+        #endregion
     }
 
     public static void AddEntityFrameworkServices(this WebApplicationBuilder builder)
