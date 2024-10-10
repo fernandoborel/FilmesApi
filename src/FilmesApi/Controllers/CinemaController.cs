@@ -16,6 +16,7 @@ public class CinemaController : ControllerBase
         _cinemaAppService = cinemaAppService;
     }
 
+
     [HttpGet]
     [Route("BuscarTodos")]
     public IActionResult GetAll()
