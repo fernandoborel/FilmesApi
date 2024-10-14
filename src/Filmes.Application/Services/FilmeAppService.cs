@@ -17,9 +17,24 @@ public class FilmeAppService : IFilmeAppService
         _mapper = mapper;
     }
 
-    public void BuscarFilmePeloNome(Filme filme)
+    public void AtualizarFilme(AtualizarFilmeCommand command)
     {
-       _filmeDomainService.BuscarFilmePeloNome(filme);
+        if(command.IdFilme == 0)
+            throw new Exception("Id do filme não informado");
+
+        var filme = _mapper.Map<Filme>(command);
+        _filmeDomainService.AtualizarFilme(filme);
+    }
+
+    public Filme BuscarFilmePeloId(int id)
+    {
+        return _filmeDomainService.BuscarFilmePeloId(id);
+    }
+
+    public void BuscarFilmePeloNome(BuscarFilmeCommand command)
+    {
+        var filme = _mapper.Map<Filme>(command);
+        _filmeDomainService.BuscarFilmePeloNome(filme);
     }
 
     public List<Filme> BuscarFilmes()

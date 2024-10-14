@@ -32,4 +32,17 @@ public class FilmeDomainService : IFilmeDomainService
     {
         _filmeRepository.Dispose();
     }
+
+    public Filme BuscarFilmePeloId(int id)
+    {
+        return _filmeRepository.GetById(id);
+    }
+
+    public void AtualizarFilme(Filme filme)
+    {
+        var id = _filmeRepository.GetById(filme.IdFilme);
+
+        if (id != null)
+            _filmeRepository.Update(filme);
+    }
 }
