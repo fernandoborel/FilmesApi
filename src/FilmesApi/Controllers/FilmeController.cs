@@ -18,10 +18,30 @@ namespace FilmesApi.Controllers
 
         [HttpGet]
         [Route("BuscarFilmePeloNome")]
-        public IActionResult Get(Filme filme)
+        public IActionResult Get([FromQuery] string titulo)
         {
-            _filmeAppService.BuscarFilmePeloNome(filme);
-            return StatusCode(200, filme);
+            try
+            {
+                var command = new BuscarFilmeCommand { Titulo = titulo };
+                _filmeAppService.BuscarFilmePeloNome(command);
+                return StatusCode(200, new { message = $"Filme encontrado: ({command.Titulo})", filme = command });
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { message = "Erro ao buscar Filme", error = e.Message });
+            }
+        }
+
+
+        [HttpGet]
+        [Route("BuscarFilmePeloId")]
+        public IActionResult Get(int id)
+        {
+            var filme = _filmeAppService.BuscarFilmePeloId(id);
+            if (filme != null)
+                return StatusCode(200, new { message = $"Filme encontrado: ({filme.Titulo})", filme = id });
+
+            return BadRequest(new { message = "Filme não encontrado" });
         }
 
         [HttpGet]
@@ -49,5 +69,7 @@ namespace FilmesApi.Controllers
                 return BadRequest(new { message = "Erro ao cadastrar Filme", error = ex.Message });
             }
         }
+
+
     }
 }

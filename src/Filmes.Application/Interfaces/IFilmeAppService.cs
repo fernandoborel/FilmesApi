@@ -7,5 +7,7 @@ public interface IFilmeAppService : IDisposable
 {
     void CriarFilme(CriarFilmeCommand command);
     List<Filme> BuscarFilmes();
-    void BuscarFilmePeloNome(Filme filme);
+    void BuscarFilmePeloNome(BuscarFilmeCommand command);
+    void AtualizarFilme(AtualizarFilmeCommand command);
+    Filme BuscarFilmePeloId(int id);
 }

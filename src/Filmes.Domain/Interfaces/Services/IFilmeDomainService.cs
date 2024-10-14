@@ -7,4 +7,6 @@ public interface IFilmeDomainService : IDisposable
     void CriarFilme(Filme filme);
     void BuscarFilmePeloNome(Filme filme);
     List<Filme> BuscarFilmes();
+    Filme BuscarFilmePeloId(int id);
+    void AtualizarFilme(Filme filme);
 }
