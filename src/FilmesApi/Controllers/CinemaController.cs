@@ -12,9 +12,7 @@ public class CinemaController : ControllerBase
     private readonly ICinemaAppService _cinemaAppService;
 
     public CinemaController(ICinemaAppService cinemaAppService)
-    {
-        _cinemaAppService = cinemaAppService;
-    }
+        => _cinemaAppService = cinemaAppService;
 
 
     [HttpGet]

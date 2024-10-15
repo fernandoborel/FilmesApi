@@ -24,7 +24,5 @@ public class EnderecoDomainService : IEnderecoDomainService
     }
 
     public void Dispose()
-    {
-        _enderecoRepository.Dispose();
-    }
+       => _enderecoRepository.Dispose();
 }

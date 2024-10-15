@@ -29,9 +29,7 @@ public class FilmeDomainService : IFilmeDomainService
     }
 
     public void Dispose()
-    {
-        _filmeRepository.Dispose();
-    }
+       => _filmeRepository.Dispose();
 
     public Filme BuscarFilmePeloId(int id)
     {

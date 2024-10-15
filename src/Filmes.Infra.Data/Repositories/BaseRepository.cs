@@ -11,9 +11,7 @@ public abstract class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, T
     private readonly SqlServerContext _context;
 
     protected BaseRepository(SqlServerContext context)
-    {
-        _context = context;
-    }
+        => _context = context;    
 
     public virtual void Create(TEntity entity)
     {
@@ -44,7 +42,5 @@ public abstract class BaseRepository<TEntity, TKey> : IBaseRepository<TEntity, T
     }
 
     public void Dispose()
-    {
-        _context?.Dispose();
-    }
+        => _context?.Dispose();
 }

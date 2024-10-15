@@ -9,7 +9,5 @@ public class SessaoRepository : BaseRepository<Sessao, int>, ISessaoRepository
     private readonly SqlServerContext _context;
 
     public SessaoRepository(SqlServerContext context) : base(context)
-    {
-        _context = context;
-    }
+        => _context = context;
 }

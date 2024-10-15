@@ -11,9 +11,7 @@ public class EnderecoController : ControllerBase
     private readonly IEnderecoAppService _enderecoAppService;
 
     public EnderecoController(IEnderecoAppService enderecoAppService)
-    {
-        _enderecoAppService = enderecoAppService;
-    }
+        => _enderecoAppService = enderecoAppService;
 
     [HttpGet]
     [Route("BuscarTodos")]
