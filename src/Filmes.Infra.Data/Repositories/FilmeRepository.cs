@@ -9,9 +9,7 @@ public class FilmeRepository : BaseRepository<Filme, string>, IFilmeRepository
     private readonly SqlServerContext _context;
 
     public FilmeRepository(SqlServerContext context) : base(context)
-    {
-        _context = context;
-    }
+        => _context = context;    
 
     public Filme GetByName(string name)
     {

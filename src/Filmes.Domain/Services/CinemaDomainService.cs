@@ -9,9 +9,7 @@ public class CinemaDomainService : ICinemaDomainService
     private readonly ICinemaRepository _cinemaRepository;
 
     public CinemaDomainService(ICinemaRepository cinemaRepository)
-    {
-        _cinemaRepository = cinemaRepository;
-    }
+        => _cinemaRepository = cinemaRepository;
 
     public List<Cinema> BuscarTodos()
     {
@@ -24,7 +22,5 @@ public class CinemaDomainService : ICinemaDomainService
     }
 
     public void Dispose()
-    {
-        _cinemaRepository?.Dispose();
-    }
+        => _cinemaRepository?.Dispose();
 }

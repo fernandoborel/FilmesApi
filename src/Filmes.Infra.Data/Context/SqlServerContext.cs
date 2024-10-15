@@ -8,9 +8,7 @@ public class SqlServerContext : DbContext
 {
 
     public SqlServerContext(DbContextOptions<SqlServerContext> options)
-        : base(options)
-    {
-    }
+        : base(options){}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

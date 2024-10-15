@@ -59,8 +59,6 @@ public class FilmeAppService : IFilmeAppService
         _filmeDomainService.DeletarFilme(filme.IdFilme);
     }
 
-    public void Dispose()
-    {
-        _filmeDomainService?.Dispose();
-    }
+    public void Dispose()    
+        => _filmeDomainService?.Dispose();
 }

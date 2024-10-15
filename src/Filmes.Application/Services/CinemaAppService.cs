@@ -29,7 +29,5 @@ public class CinemaAppService : ICinemaAppService
     }
 
     public void Dispose()
-    {
-        _cinemaDomainService.Dispose();
-    }
+        => _cinemaDomainService.Dispose();
 }

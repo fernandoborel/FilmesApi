@@ -28,8 +28,6 @@ public class EnderecoAppService : IEnderecoAppService
         _enderecoDomainService.CriarEndereco(endereco);
     }
 
-    public void Dispose()
-    {
-        _enderecoDomainService.Dispose();
-    }
+    public void Dispose()    
+        => _enderecoDomainService.Dispose();
 }

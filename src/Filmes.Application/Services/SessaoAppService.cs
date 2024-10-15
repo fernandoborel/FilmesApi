@@ -29,7 +29,5 @@ public class SessaoAppService : ISessaoAppService
     }
 
     public void Dispose()
-    {
-        _sessaoDomainService?.Dispose();
-    }
+        => _sessaoDomainService?.Dispose();
 }

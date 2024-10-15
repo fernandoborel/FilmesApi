@@ -9,9 +9,7 @@ public class SessaoDomainService : ISessaoDomainService
     private readonly ISessaoRepository _repository;
 
     public SessaoDomainService(ISessaoRepository repository)
-    {
-        _repository = repository;
-    }
+       => _repository = repository;
 
     public List<Sessao> BuscarTodos()
     {
@@ -24,7 +22,5 @@ public class SessaoDomainService : ISessaoDomainService
     }
 
     public void Dispose()
-    {
-        _repository?.Dispose();
-    }
+        => _repository?.Dispose();
 }

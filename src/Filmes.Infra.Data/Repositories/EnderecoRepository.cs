@@ -9,7 +9,5 @@ public class EnderecoRepository : BaseRepository<Endereco, int>, IEnderecoReposi
     private readonly SqlServerContext _context;
 
     public EnderecoRepository(SqlServerContext context) : base(context)
-    {
-        _context = context;
-    }
+        => _context = context;    
 }
