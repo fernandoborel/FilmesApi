@@ -38,11 +38,13 @@ public class FilmeDomainService : IFilmeDomainService
         return _filmeRepository.GetById(id);
     }
 
-    public void AtualizarFilme(Filme filme)
+    public Filme AtualizarFilme(int id)
     {
-        var id = _filmeRepository.GetById(filme.IdFilme);
+        var filme = _filmeRepository.GetById(id);
 
-        if (id != null)
+        if (filme != null)
             _filmeRepository.Update(filme);
+
+        return filme;
     }
 }

@@ -19,11 +19,16 @@ public class FilmeAppService : IFilmeAppService
 
     public void AtualizarFilme(AtualizarFilmeCommand command)
     {
-        if(command.IdFilme == 0)
+        if (command.IdFilme == 0)
             throw new Exception("Id do filme não informado");
 
-        var filme = _mapper.Map<Filme>(command);
-        _filmeDomainService.AtualizarFilme(filme);
+        var filmeExistente = _filmeDomainService.BuscarFilmePeloId(command.IdFilme);
+
+        if (filmeExistente == null)
+            throw new Exception("Filme não encontrado");
+
+        _mapper.Map(command, filmeExistente);
+        _filmeDomainService.AtualizarFilme(filmeExistente.IdFilme);
     }
 
     public Filme BuscarFilmePeloId(int id)

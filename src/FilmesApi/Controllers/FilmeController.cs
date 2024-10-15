@@ -16,6 +16,7 @@ namespace FilmesApi.Controllers
             _filmeAppService = filmeAppService;
         }
 
+
         [HttpGet]
         [Route("BuscarFilmePeloNome")]
         public IActionResult Get([FromQuery] string titulo)
@@ -44,6 +45,7 @@ namespace FilmesApi.Controllers
             return BadRequest(new { message = "Filme não encontrado" });
         }
 
+
         [HttpGet]
         [Route("BuscarTodos")]
         public IActionResult GetAll()
@@ -54,6 +56,7 @@ namespace FilmesApi.Controllers
 
             return BadRequest(new { message = "Nenhum filme encontrado" });
         }
+
 
         [HttpPost]
         [Route("CriarFilme")]
@@ -71,5 +74,19 @@ namespace FilmesApi.Controllers
         }
 
 
+        [HttpPut]
+        [Route("AtualizarFilme")]
+        public IActionResult Put(AtualizarFilmeCommand command)
+        {
+            try
+            {
+                _filmeAppService.AtualizarFilme(command);
+                return StatusCode(200, new { message = "Filme atualizado com sucesso", filme = command });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Erro ao atualizar Filme", error = ex.Message });
+            }
+        }
     }
 }
