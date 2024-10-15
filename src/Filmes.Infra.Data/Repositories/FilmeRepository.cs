@@ -26,13 +26,13 @@ public class FilmeRepository : BaseRepository<Filme, string>, IFilmeRepository
 
     public Filme UpdateFilme(Filme filme)
     {
-        var id = _context.Filme.Find(filme.IdFilme);
+        var filmeExistente = _context.Filme.Find(filme.IdFilme);
 
-        if (id != null)
+        if (filmeExistente != null)
         {
-            _context.Filme.Update(filme);
+            _context.Entry(filmeExistente).CurrentValues.SetValues(filme);
             _context.SaveChanges();
-            return filme;
+            return filmeExistente;
         }
 
         return null;
