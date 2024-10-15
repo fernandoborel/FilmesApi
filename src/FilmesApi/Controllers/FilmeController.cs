@@ -88,5 +88,21 @@ namespace FilmesApi.Controllers
                 return BadRequest(new { message = "Erro ao atualizar Filme", error = ex.Message });
             }
         }
+
+
+        [HttpDelete]
+        [Route("DeletarFilme")]
+        public IActionResult Delete(DeletarFilmeCommand command)
+        {
+            try
+            {
+                _filmeAppService.DeletarFilme(command);
+                return StatusCode(200, new { message = "Filme deletado com sucesso", filme = command });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = "Erro ao deletar Filme", error = ex.Message });
+            }
+        }
     }
 }

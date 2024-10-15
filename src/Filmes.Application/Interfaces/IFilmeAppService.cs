@@ -10,4 +10,5 @@ public interface IFilmeAppService : IDisposable
     void BuscarFilmePeloNome(BuscarFilmeCommand command);
     void AtualizarFilme(AtualizarFilmeCommand command);
     Filme BuscarFilmePeloId(int id);
+    void DeletarFilme(DeletarFilmeCommand command);
 }

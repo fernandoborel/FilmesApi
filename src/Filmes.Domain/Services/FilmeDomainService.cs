@@ -47,4 +47,14 @@ public class FilmeDomainService : IFilmeDomainService
 
         return filme;
     }
+
+    public Filme DeletarFilme(int id)
+    {
+        var filme = _filmeRepository.GetById(id);
+
+        if (filme != null)
+            _filmeRepository.Delete(filme);
+
+        return filme;
+    }
 }

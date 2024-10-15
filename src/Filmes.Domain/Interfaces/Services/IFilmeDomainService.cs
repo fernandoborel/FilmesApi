@@ -9,4 +9,5 @@ public interface IFilmeDomainService : IDisposable
     List<Filme> BuscarFilmes();
     Filme BuscarFilmePeloId(int id);
     Filme AtualizarFilme(int id);
+    Filme DeletarFilme(int id);
 }

@@ -53,6 +53,12 @@ public class FilmeAppService : IFilmeAppService
         _filmeDomainService.CriarFilme(filme);
     }
 
+    public void DeletarFilme(DeletarFilmeCommand command)
+    {
+        var filme = _mapper.Map<Filme>(command);
+        _filmeDomainService.DeletarFilme(filme.IdFilme);
+    }
+
     public void Dispose()
     {
         _filmeDomainService?.Dispose();

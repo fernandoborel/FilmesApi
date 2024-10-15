@@ -17,5 +17,6 @@ public class CommandToEntity : Profile
         CreateMap<AtualizarFilmeCommand, Filme>().ReverseMap();
         CreateMap<BuscarFilmeCommand, Filme>().ReverseMap();
         CreateMap<CriarSessaoComand, Sessao>().ReverseMap();
+        CreateMap<DeletarFilmeCommand, Filme>().ReverseMap();
     }
 }

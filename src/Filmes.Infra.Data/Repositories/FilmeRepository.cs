@@ -37,4 +37,18 @@ public class FilmeRepository : BaseRepository<Filme, string>, IFilmeRepository
 
         return null;
     }
+
+    public Filme DeletarFilme(int id)
+    {
+        var filme = _context.Filme.Find(id);
+
+        if (filme != null)
+        {
+            _context.Filme.Remove(filme);
+            _context.SaveChanges();
+            return filme;
+        }
+
+        return null;
+    }
 }
