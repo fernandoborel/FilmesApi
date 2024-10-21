@@ -1,12 +1,18 @@
 ﻿using Filmes.Application.Interfaces;
 using Filmes.Application.Services;
 using Filmes.Domain.Interfaces.Repositories;
+using Filmes.Domain.Interfaces.Security;
 using Filmes.Domain.Interfaces.Services;
 using Filmes.Domain.Mappings;
 using Filmes.Domain.Services;
 using Filmes.Infra.Data.Context;
 using Filmes.Infra.Data.Repositories;
+using Filmes.Infra.Security.Services;
+using Filmes.Infra.Security.Settings;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace FilmesApi;
 
@@ -45,6 +51,20 @@ public static class Setup
         builder.Services.AddTransient<ISessaoRepository, SessaoRepository>();
 
         #endregion
+
+        #region Usuario
+
+        builder.Services.AddTransient<IUsuarioRepository, UsuarioRepository>();
+        builder.Services.AddTransient<IUsuarioDomainService, UsuarioDomainService>();
+        builder.Services.AddTransient<IUsuarioAppService, UsuarioAppService>();
+
+        #endregion
+
+        #region Autenticar
+
+        builder.Services.AddTransient<IAuthorizationSecurity, AuthorizationSecurity>();
+
+        #endregion
     }
 
     public static void AddEntityFrameworkServices(this WebApplicationBuilder builder)
@@ -57,4 +77,47 @@ public static class Setup
     {
         builder.Services.AddAutoMapper(typeof(CommandToEntity));
     }
+
+    public static void AddCorsServices(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("DefaultPolicy",
+                builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+        });
+    }
+
+    public static void AddJwtBearerSecurity(this WebApplicationBuilder builder)
+    {
+        builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
+        builder.Services.AddTransient<IAuthorizationSecurity, AuthorizationSecurity>();
+
+        builder.Services.AddAuthentication(
+            auth =>
+            {
+                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }
+            ).AddJwtBearer(
+            bearer =>
+            {
+                bearer.RequireHttpsMetadata = false;
+                bearer.SaveToken = true;
+                bearer.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.ASCII.GetBytes
+                        (builder.Configuration
+                        .GetSection("JwtSettings")
+                        .GetSection("SecretKey").Value)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+    }
+
 }

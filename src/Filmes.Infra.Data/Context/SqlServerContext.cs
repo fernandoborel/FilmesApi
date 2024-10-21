@@ -17,6 +17,7 @@ public class SqlServerContext : DbContext
         modelBuilder.ApplyConfiguration(new FilmeMap());
         modelBuilder.ApplyConfiguration(new SessaoMap());
         modelBuilder.ApplyConfiguration(new ShoppingMap());
+        modelBuilder.ApplyConfiguration(new UsuarioMap());
     }
 
     public DbSet<Cinema> Cinema { get; set; }
@@ -24,4 +25,5 @@ public class SqlServerContext : DbContext
     public DbSet<Filme> Filme { get; set; }
     public DbSet<Sessao> Sessao { get; set; }
     public DbSet<Shopping> Shopping { get; set; }
+    public DbSet<Usuario> Usuario { get; set; }
 }

@@ -11,6 +11,8 @@ builder.Services.AddSwaggerGen();
 Setup.AddRegisterServices(builder);
 Setup.AddEntityFrameworkServices(builder);
 Setup.AddAutoMapperServices(builder);
+Setup.AddCorsServices(builder);
+Setup.AddJwtBearerSecurity(builder);
 
 var app = builder.Build();
 
@@ -21,6 +23,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
