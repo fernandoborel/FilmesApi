@@ -5,9 +5,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddRouting(opt => opt.LowercaseUrls = true);
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddSwaggerGen();
 
-
+Setup.AddSwagger(builder);
 Setup.AddRegisterServices(builder);
 Setup.AddEntityFrameworkServices(builder);
 Setup.AddAutoMapperServices(builder);
