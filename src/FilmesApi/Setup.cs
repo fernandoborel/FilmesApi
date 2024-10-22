@@ -12,12 +12,61 @@ using Filmes.Infra.Security.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
 
 namespace FilmesApi;
 
 public static class Setup
 {
+    public static void AddSwagger(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddSwaggerGen(s =>
+        {
+            s.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "Filmes API",
+                Version = "v1",
+                Description = "API de Filmes",
+                Contact = new OpenApiContact
+                {
+                    Name = "Fernando Borel",
+                    Email = "fernandomenezesborel@gmail.com",
+                    Url = new Uri("https://github.com/fernandoborel")
+                }
+            });
+
+            s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Description = "Insira o token JWT sem a palavra 'Bearer'. Exemplo: '12345abcdef'",
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.Http,
+                Scheme = "Bearer", // Define o esquema como 'Bearer'
+                BearerFormat = "JWT", // Especifica o formato do token
+            });
+
+            s.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    },
+                    Scheme = "Bearer",
+                    Name = "Bearer",
+                    In = ParameterLocation.Header,
+                },
+                new List<string>()
+            }
+        });
+        });
+    }
+
+
     public static void AddRegisterServices(this WebApplicationBuilder builder)
     {
         #region Cinema

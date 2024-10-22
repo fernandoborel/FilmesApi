@@ -1,9 +1,11 @@
 ﻿using Filmes.Application.Commands.Sessao;
 using Filmes.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FilmesApi.Controllers;
 
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class SessaoController : ControllerBase
